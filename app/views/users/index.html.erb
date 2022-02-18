@@ -1,0 +1,34 @@
+<div class="container">
+    <% if flash[:notice] %>
+     <div class="alert-light text-success" role="alert">
+      <%= notice %>
+     </div>
+     <% end %>
+  <div class="row">
+  <%= render 'books/list', post_images: @books %>
+
+  <div class="col-lg-8 offset-lg-1">
+  <h1>Users</h1>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+       <% @users.each do |user| %>
+      <tr>
+      <td><%= image_tag user.get_profile_image(40,40) %></td>
+      <td><%= user.name %></td>
+      <td><%= link_to "show",user_path(user.id) %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+
+  </div>
+</div>
