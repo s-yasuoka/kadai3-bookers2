@@ -6,10 +6,62 @@
   <% end %>
 
   <div class="row">
-   <%= render 'list', post_images: @books %>
+    <div class="col-md-3">
+      <!--<= render 'list', post_images: @books %>-->
+          <h1>User info</h1>
+     <%= image_tag @user.get_profile_image(100,100) %>
+     <table class="table">
+       <thead>
+         <tr>
+           <th>name</th>
+           <th><%= @user.name %></th>
+         </tr>
+       </thead>
+       <tbody>
+         <tr>
+           <th>introduction</th>
+           <th><%= @user.introduction %></th>
+         </tr>
+       </tbody>
+     </table>
+        <%= link_to edit_user_path(@user),class:"btn btn-outline-secondary btn-block" do %>
+         <i class="fas fa-user-cog"></i>
+        <% end %>
 
-    <div class="col-lg-8 offset-lg-1">
-      <h1>BooK detail</h1>
+
+
+        <h2 class="mt-3">New book</h2>
+        <!--アラート-->
+        <% if @book_new.errors.any? %>
+         <ul class="alert alert-light text-danger" role="alert">
+          <h6 class="alert-heading">
+            <%= pluralize(@book_new.errors.count,"error") %> prohibited this obj from being saved:
+          </h6>
+        <% @book_new.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+         </ul>
+        <% end %>
+
+        <%= form_with model:@book_new,local:true do |f|%>
+        <div class="form-group">
+         <h4>Title</h4>
+         <%= f.text_field:title %>
+        </div>
+        <div class="form-group">
+         <h4>Opinion</h4>
+         <%=f.text_area:body , autofocus:true %>
+        </div>
+        <div class="form-group">
+         <%=f.submit'Create Book',class:"btn btn-success" %>
+        </div>
+        <% end %>
+    </div>
+
+
+
+    <div class="col-md-8 offset-md-1">
+      <h1>Book detail</h1>
         <table class="table">
         <tbody>
           <tr>

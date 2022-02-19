@@ -16,7 +16,7 @@ class BooksController < ApplicationController
     if @book.user == current_user
       render "edit"
     else
-      redirect_to book_path(@book.id)
+      redirect_to "/books"
     end
   end
 
@@ -25,7 +25,7 @@ class BooksController < ApplicationController
     @book_new.user_id = current_user.id
     @books = Book.all
     if @book_new.save
-      redirect_to user_path(@user.id), flash:{notice:"You have created book successfully."}
+      redirect_to book_path(@book_new.id), flash:{notice:"You have created book successfully."}
     else
       render 'index'
     end

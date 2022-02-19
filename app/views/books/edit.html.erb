@@ -7,6 +7,17 @@
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-sm-0 mx-auto">
 
+   <% if @book.errors.any? %>
+     <ul class="alert alert-light text-danger" role="alert">
+      <h6 class="alert-heading">
+        <%= pluralize(@book.errors.count,"error") %> prohibited this obj from being saved:
+      </h6>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+     </ul>
+    <% end %>
+
   <h1>Editing Book</h1>
   <div>
     <%= form_with model:@book,local:true do |f| %>
